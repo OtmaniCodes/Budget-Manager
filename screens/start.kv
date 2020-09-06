@@ -1,0 +1,64 @@
+<Start>:
+    my_wallet: my_wallet
+    FloatLayout:
+        canvas.before:
+            Color:
+                rgba: rgba('#FFFFFF')
+            Rectangle:
+                size: self.size
+                pos: self.pos
+        MDIcon:
+            pos_hint: {"top":.95, 'center_x':.5}
+            size_hint: 1, .4
+            font_size: '50dp'
+            halign: 'center'
+            icon: 'coins'
+        MDIcon:
+            id: my_wallet
+            colour: [0,0,0,1]
+            pos_hint: {"top":.85, 'center_x':.5}
+            size_hint: 1, .4
+            font_size: '110dp'
+            halign: 'center'
+            icon: 'wallet'
+            theme_text_color: 'Custom'
+            text_color: self.colour
+
+        MDLabel:
+            text: 'budget manager'.title()
+            bold: True
+            size_hint: 1, .4
+            halign: 'center' 
+            #size: self.texture_size
+            font_size: '35dp'
+            theme_text_color: 'Custom'
+            text_color: [0,0,0,1]
+            pos_hint: {"center_x":.5, 'center_y':.5}
+
+        MDRaisedButton:
+            text: 'start'.upper()
+            bold: True
+            theme_text_color: 'Custom'
+            md_bg_color: [0,0,0,1]
+            text_color: [1,1,1,1]
+            size_hint: .6, .1 
+            pos_hint: {'center_x':.5, 'top':.33}
+            on_release:
+                app.go_to_home("start")
+        Label:
+            text: 'Created by:'.lower()
+            size_hint: None, None
+            size: self.texture_size
+            underline: True
+            font_size: 13
+            color: [0,0,0,1]
+            pos_hint: {"x":.3, 'y':.01}
+        Label:
+            text: 'ahmed el otmani'.title()
+            size_hint: None, None
+            size: self.texture_size
+            bold: True
+            font_size: 13
+            color: [0,0,0,1]
+            pos_hint: {"x":.49, 'y':.01}
+

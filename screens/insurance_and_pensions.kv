@@ -1,0 +1,127 @@
+<Bttn@Button>:
+    bold: True
+    background_normal: ''
+    background_down: ''
+    background_color: [0,0,0,1]
+    color: [1,1,1,1]
+    on_press: 
+        self.background_color= [0,1,1,1]
+        self.color= [0,1,1,1]
+    on_release:
+        self.background_color= [0,0,0,1]
+        self.color= [1,1,1,1]
+
+<Ent@MDTextFieldRect>:
+    multiline: False
+    input_tupe: 'number'
+    input_filter: 'float'
+
+<Insurance_Pensions>:
+    in1: in1
+    in2: in2
+    canvas.before:
+        Color:
+            rgba: rgba('#00FFFF')
+        Rectangle:
+            size: self.size
+            pos: self.pos
+        Color:
+            rgba: 0,0,0,1
+        Line:
+            points: [(0, root.height*(2/3)-10), (root.width,root.height*(2/3)-10)]
+            width: 1.5
+        Color:
+            rgba: 0,0,0,1
+        Line:
+            points: [(0, root.height*(1/3)-10), (root.width,root.height*(1/3)-10)]
+            width: 1.5
+
+
+    MDToolbar:
+        pos_hint: {'top':1}
+        size_hint: 1, .08
+        md_bg_color: [0,0,0,1]
+        title: 'Insurance and Pensions'
+        elevation: 10.5
+        bold: True
+        left_action_items: [['arrow-left', lambda x: app.go_to_home(1) if in1.disabled==True and in2.disabled==True else app.show_me('inside')]]
+
+    FloatLayout:
+        size_hint: 1, .92
+        pos_hint: {'bottom':1}
+        Label:
+            size_hint: None, None
+            size: self.texture_size
+            font_size: 25
+            pos_hint: {'top':1, 'x':.025}
+            text: 'Pensions:'
+            color: 0,0,0,1
+            bold: True
+        Ent:
+            id: in1
+            hint_text: 'spendings...'
+            font_size: 24
+            size_hint: .95, .08
+            pos_hint: {'top':.95, 'x':.025}
+        BoxLayout:
+            spacing: 6
+            size_hint: .95, .05
+            pos_hint: {'top':.85, 'x':.025}
+            Bttn:
+                text: 'save'
+                on_release:
+                    in1.focus= False
+                    in1.disabled= True
+                on_press:
+                    app.send_data(in1.text,"in_p", 'in_p1') if in1.disabled==False else app.send_data(0, 'in_p', 'in_p10')
+
+            Bttn:
+                text: "edit"
+                on_release:
+                    in1.focus= True
+                    in1.disabled= False
+            
+
+
+        Label:
+            size_hint: None, None
+            size: self.texture_size
+            font_size: 25
+            pos_hint: {'top':.68, 'x':.025}
+            text: 'Life Insurance:'
+            color: 0,0,0,1
+            bold: True
+        Ent:
+            id: in2
+            hint_text: 'spendings...'
+            size_hint: .95, .08
+            pos_hint: {'top':.63, 'x':.025}
+            font_size: 24
+        BoxLayout:
+            spacing: 6
+            size_hint: .95, .05
+            pos_hint: {'top':.53, 'x':.025}
+            Bttn:
+                text: 'save'
+                on_release:
+                    in2.focus= False
+                    in2.disabled= True
+                on_press:
+                    app.send_data(in2.text,"in_p", 'in_p2') if in2.disabled==False else app.send_data(0, 'in_p', 'in_p20')
+
+            Bttn:
+                text: "edit"
+                on_release:
+                    in2.focus= True
+                    in2.disabled= False
+            
+    MDLabel:
+        size_hint: [1, .05]
+        pos_hint: {"center_x":.5, 'y':.01}
+        halign: 'center'
+        theme_text_color: 'Custom'
+        text_color: [1,0,0,1]
+        text: '(make sure that all textfields are saved.)'.title()
+        font_style: 'Caption'
+
+

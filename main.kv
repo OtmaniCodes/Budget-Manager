@@ -1,0 +1,53 @@
+#: kivy  1.11.1
+
+#: include 'screens\start.kv'
+#: include 'screens\food.kv'
+#: include 'screens\healthcare.kv'
+#: include 'screens\housing.kv'
+#: include 'screens\insurance_and_pensions.kv'
+#: include 'screens\other_g_and_s.kv'
+#: include 'screens\transportation.kv'
+#: include 'screens\taxes.kv'
+#: include 'screens\savings.kv'
+#: include 'screens\home.kv'
+
+FloatLayout:
+
+    ScreenManager:
+        id: screen_manager
+        
+        Start:
+            name: 'start_sc'
+            id: start_id
+
+        Home:
+            name: 'home_sc'
+            id: home_id
+
+        Food:
+            name: 'food_sc'
+            id: food_id
+        Housing:
+            name: 'housing_sc'
+            id: housing_id
+        Healthcare:
+            name: 'health_sc'
+            id: health_id
+        Insurance_Pensions:
+            name: 'iandp_sc'
+            id: iandp_id
+        Other_Goods_Services:
+            name: 'gands_sc'
+            id: gands_id
+        Transportation:
+            name: 'tran_sc'
+            id: tran_id
+        Taxes:
+            name: 'taxes_sc'
+            id: taxes_id
+        Savings:
+            name: 'savings_sc'
+            id: savings_id
+
+
+        

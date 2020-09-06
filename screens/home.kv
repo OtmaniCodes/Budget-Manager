@@ -1,0 +1,169 @@
+<Btn@MDRaisedButton>:
+    background_normal: ''
+    md_bg_color: [0, 1,1,1]
+    font_size: '40dp'
+    bold: True
+
+<Btn2@Button>:
+    background_normal: ''
+    background_color: [.6, 0,0,1]
+    font_size: 18
+    bold: True
+
+<Home>:
+    salary: salary
+    FloatLayout:
+        canvas.before:
+            Color:
+                rgba: rgba('#FFFFFF')
+            Rectangle:
+                size: self.size
+                pos: self.pos
+
+        # upper part
+        MDCard:
+            id: one
+            size_hint: 1, .30
+            pos_hint: {'top':1}
+            elevation: 11
+            md_bg_color: [0,0,0,1]
+            orientation: 'vertical'
+            FloatLayout:
+                Label:
+                    text: ' [u]Budget[/u] [b][color=#980000]Manager[/color][/b]'
+                    color: [1,1,1,1]
+                    size_hint: None, None
+                    size: self.texture_size
+                    pos_hint: {'top':.93, 'center_x':.5}  
+                    font_size: 45
+                    markup: True
+
+                MDTextFieldRound:
+                    id: salary
+                    input_type: 'number'
+                    input_filter: 'float'
+                    hint_text: 'Enter your monthly income here...'.title()
+                    md_bg_color: [1,1,1,1]
+                    multiline: False
+                    size_hint: .8, .2
+                    pos_hint: {'top':.95-.35, 'x':.1}
+                    normal_color: 1,1,1,1
+                    color_active: 1,1,1,1  
+                    icon_right: 'currency-usd'
+
+                BoxLayout:
+                    size_hint: .8, .12
+                    pos_hint: {'top':.28 ,'x':.1}
+                    orientation: 'horizontal'
+                    spacing: 10
+                    Btn2:
+                        text: 'save'
+                        on_press:
+                            self.color= [0,0,0,1]
+                        on_release:
+                            self.color= [1,1,1,1]
+                            salary.disabled= True
+                            salary.focus= False
+
+
+                    Btn2:
+                        text: 'edit'
+                        on_press:
+                            self.color= [0,0,0,1]
+                        on_release:
+                            self.color= [1,1,1,1]
+                            salary.disabled= False
+                            salary.focus= True
+                        
+        # middle part
+        FloatLayout:
+            id: three
+            size_hint:1, .70
+            pos_hint: {'y': 0}
+            BoxLayout: # Buttons of the left column
+                spacing: 30
+                orientation: "vertical"
+                size_hint:.4, .75
+                pos_hint: {"x":.05 , 'y': .20}
+                Btn:
+                    text: 'Food'
+                    font_size: '25dp'
+                    size_hint: 1,1
+                    theme_text_color: 'Custom'
+                    text_color: [0,0,0,1]
+                    on_release:
+                        app.go_to_food() if salary.text != '' else app.show_me('outside')
+                Btn:
+                    text: 'Transportation'
+                    size_hint: 1,1
+                    font_size: '20dp'
+                    theme_text_color: 'Custom'
+                    text_color: [0,0,0,1]
+                    on_release:
+                        app.go_to_transportation() if salary.text != '' else app.show_me('outside')
+                Btn:
+                    text: 'Insurance\nand pensions'
+                    size_hint: 1,1
+                    font_size: '19dp'
+                    theme_text_color: 'Custom'
+                    text_color: [0,0,0,1]
+                    on_release:
+                        app.go_to_iandp() if salary.text != '' else app.show_me('outside')
+                Btn:
+                    text: '[b]Savings[/b]'
+                    markup: True
+                    md_bg_color: [0,1,0,1]
+                    size_hint: 1,1
+                    font_size: '25dp'
+                    on_release:
+                        app.go_to_savings() if salary.text != '' else app.show_me('outside')
+
+            BoxLayout: # Buttons of the right column
+                orientation: "vertical"
+                spacing: 30
+                size_hint:.4, .75
+                pos_hint: {"x":.55 , 'y': .20}
+                Btn:
+                    text: 'Housing'
+                    size_hint: 1,1
+                    font_size: '25dp'
+                    theme_text_color: 'Custom'
+                    text_color: [0,0,0,1]
+                    on_release:
+                        app.go_to_housing() if salary.text != '' else app.show_me('outside')
+                Btn:
+                    text: 'Healthcare'
+                    size_hint: 1,1
+                    font_size: '25dp'
+                    theme_text_color: 'Custom'
+                    text_color: [0,0,0,1]
+                    on_release:
+                        app.go_to_healthcare() if salary.text != '' else app.show_me('outside')
+                Btn:
+                    text: 'Other Goods\nand Services'
+                    size_hint: 1,1
+                    font_size: '19dp'
+                    theme_text_color: 'Custom'
+                    text_color: [0,0,0,1]
+                    on_release:
+                        app.go_to_othergands() if salary.text != '' else app.show_me('outside')
+                Btn:
+                    text: '[b]Taxes[/b]'
+                    markup: True
+                    md_bg_color: [1,0,0,1]
+                    size_hint: 1,1
+                    font_size: '25dp'
+                    on_release:
+                        app.go_to_taxs() if salary.text != '' else app.show_me('outside')
+
+            Btn:
+                text: 'Income Managements'
+                size_hint: .9, .13
+                pos_hint: {"x":.05, "y":.02}
+                text_theme_color: 'Custom'
+                text_color: [.6, 0,0,1]
+                md_bg_color: [0,0,0,.8]
+                bold: True
+                font_size: '22dp'
+                on_release:
+                    app.budget_managemnts(salary.text) if app.acces_infos() and salary.text != '' else app.show_me('side')

@@ -1,0 +1,158 @@
+<Bttn@Button>:
+    bold: True
+    background_normal: ''
+    background_down: ''
+    background_color: [0,0,0,1]
+    color: [1,1,1,1]
+    on_press: 
+        self.background_color= [0,1,1,1]
+        self.color= [0,1,1,1]
+    on_release:
+        self.background_color= [0,0,0,1]
+        self.color= [1,1,1,1]
+
+<Ent@MDTextFieldRect>:
+    multiline: False
+
+
+<Transportation>:
+    tran1: tran1
+    tran2: tran2
+    tran3: tran3
+    canvas.before:
+        Color:
+            rgba: rgba('#00FFFF')
+        Rectangle:
+            size: self.size
+            pos: self.pos
+        Color:
+            rgba: 0,0,0,1
+        Line:
+            points: [(0, root.height*(2/3)-10), (root.width,root.height*(2/3)-10)]
+            width: 1.5
+        Color:
+            rgba: 0,0,0,1
+        Line:
+            points: [(0, root.height*(1/3)-10), (root.width,root.height*(1/3)-10)]
+            width: 1.5
+
+
+    MDToolbar:
+        pos_hint: {'top':1}
+        size_hint: 1, .08
+        md_bg_color: [0,0,0,1]
+        title: 'Transportation'
+        elevation: 10.5
+        bold: True
+        left_action_items: [['arrow-left', lambda x: app.go_to_home(1) if tran1.disabled==True and tran2.disabled==True and tran3.disabled==True else app.show_me('inside')]]
+
+    FloatLayout:
+        size_hint: 1, .92
+        pos_hint: {'bottom':1}
+        Label:
+            size_hint: None, None
+            size: self.texture_size
+            font_size: 25
+            pos_hint: {'top':1, 'x':.025}
+            text: 'Vehicle Purchases:'
+            color: 0,0,0,1
+            bold: True
+        Ent:
+            id: tran1
+            hint_text: 'spendings...'
+            font_size: 24
+            size_hint: .95, .08
+            pos_hint: {'top':.95, 'x':.025}
+        BoxLayout:
+            spacing: 6
+            size_hint: .95, .05
+            pos_hint: {'top':.85, 'x':.025}
+            Bttn:
+                text: 'save'
+                on_release:
+                    tran1.focus= False
+                    tran1.disabled= True
+                on_press:
+                    app.send_data(tran1.text,"tran", 'tran1') if tran1.disabled==False else app.send_data(0, 'tran', 'tran10')
+
+            Bttn:
+                text: "edit"
+                on_release:
+                    tran1.focus= True
+                    tran1.disabled= False
+            
+
+
+        Label:
+            size_hint: None, None
+            size: self.texture_size
+            font_size: 25
+            pos_hint: {'top':.68, 'x':.025}
+            text: 'Gasoline:'
+            color: 0,0,0,1
+            bold: True
+        Ent:
+            id: tran2
+            hint_text: 'spendings...'
+            size_hint: .95, .08
+            pos_hint: {'top':.63, 'x':.025}
+            font_size: 24
+        BoxLayout:
+            spacing: 6
+            size_hint: .95, .05
+            pos_hint: {'top':.53, 'x':.025}
+            Bttn:
+                text: 'save'
+                on_release:
+                    tran2.focus= False
+                    tran2.disabled= True
+                on_press:
+                    app.send_data(tran2.text,"tran", 'tran2') if tran2.disabled==False else app.send_data(0, 'tran', 'tran20')
+
+            Bttn:
+                text: "edit"
+                on_release:
+                    tran2.focus= True
+                    tran2.disabled= False
+            
+
+        Label:
+            size_hint: None, None
+            size: self.texture_size
+            font_size: 25
+            pos_hint: {'top':.32, 'x':.025}
+            text: 'Other Transportation:'
+            color: 0,0,0,1
+            bold: True
+        Ent:
+            id: tran3
+            hint_text: 'spendings...'
+            font_size: 24
+            size_hint: .95, .08
+            pos_hint: {'top':.27, 'x':.025}
+        BoxLayout:
+            spacing: 6
+            size_hint: .95, .05
+            pos_hint: {'top':.17, 'x':.025}
+            Bttn:
+                text: 'save'
+                on_release:
+                    tran3.focus= False
+                    tran3.disabled= True
+                on_press:
+                    app.send_data(tran3.text,"tran", 'tran3') if tran3.disabled==False else app.send_data(0, 'tran', 'tran30')
+
+            Bttn:
+                text: "edit"
+                on_release:
+                    tran3.focus= True
+                    tran3.disabled= False
+
+    MDLabel:
+        size_hint: [1, .05]
+        pos_hint: {"center_x":.5, 'y':.01}
+        halign: 'center'
+        theme_text_color: 'Custom'
+        text_color: [1,0,0,1]
+        text: '(make sure that all textfields are saved.)'.title()
+        font_style: 'Caption'
